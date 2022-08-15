@@ -1,0 +1,17 @@
+{
+	"name": "json-methods",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"repository": "git@github.com:hopinc/json-methods.git",
+	"author": "Alistair Smith <hi@alistair.sh>",
+	"license": "MIT",
+	"scripts": {
+		"build": "tsup src/index.ts --format cjs,esm --dts"
+	},
+	"devDependencies": {
+		"tsup": "^6.2.2",
+		"typescript": "^4.7.4"
+	}
+}
