@@ -17,7 +17,7 @@ export function create<T extends object>() {
 					}
 
 					if (property in json) {
-						return json;
+						return json[property as keyof T];
 					}
 
 					if (property in methods) {
