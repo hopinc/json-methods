@@ -4,6 +4,7 @@
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
+	"sideEffects": false,
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/hopinc/json-methods.git"
@@ -21,7 +22,7 @@
 		"README.md"
 	],
 	"scripts": {
-		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"build": "tsup src/index.ts --format cjs,esm --dts --minify",
 		"examples-basic": "tsx examples/basic.ts",
 		"release": "yarn build && yarn publish"
 	},

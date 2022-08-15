@@ -1,6 +1,6 @@
 # `json-methods`
 
-A utility for adding methods to any JSON object. For example, deserializing a user object from your API and adding a `.isAdult()`.
+A utility for adding methods to any JSON object. For example, deserializing a user object from your API and adding a `.isAdult()`. Whilst this library works great for validation, use cases extend far beyond that. It was built for `@onehop/js` to enable regular objects to have utility methods that are context aware (like fetching a deployment's containers in Hop).
 
 ## Installation
 
@@ -14,7 +14,7 @@ npm install --save @onehop/json-methods
 
 ## Basic Example
 
-For something a little bit more in depth, but still simple, checkout [/examples/basic.ts](/examples/basic.ts)
+For something a little bit more in depth, but still simple, check out [/examples/basic.ts](/examples/basic.ts)
 
 ```ts
 import {create} from '@onehop/json-methods';
