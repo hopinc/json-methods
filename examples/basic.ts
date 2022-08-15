@@ -34,3 +34,9 @@ console.log("Alistair is over 16?:", alistair.isAtLeastAge(16));
 console.log(JSON.stringify(alistair));
 
 console.log("Keys:", Object.getOwnPropertyNames(alistair));
+
+for (const key in alistair) {
+	console.log(key);
+}
+
+console.log(`Stringifying ${alistair}`);
