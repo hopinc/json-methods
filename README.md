@@ -14,6 +14,8 @@ npm install --save @onehop/json-methods
 
 ## Basic Example
 
+For something a little bit more in depth, but still simple, checkout [/examples/basic.ts](/examples/basic.ts)
+
 ```ts
 import { create } from "@onehop/json-methods";
 
