@@ -9,7 +9,7 @@
 		"url": "https://github.com/hopinc/json-methods.git"
 	},
 	"homepage": "https://hop.io",
-	"author": "Alistair Smith <hi@alistair.sh>",
+	"author": "Hop Developers <developers@hop.io>",
 	"license": "MIT",
 	"publishConfig": {
 		"access": "public"
