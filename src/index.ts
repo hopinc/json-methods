@@ -8,12 +8,12 @@ export function create<T extends object>() {
 		function getProxy(json: T) {
 			return new Proxy(json, {
 				get(_, property) {
-					if (property === "toJSON") {
+					if (property === 'toJSON') {
 						return () => json;
 					}
 
-					if (property === "toString") {
-						return () => "[object Object]";
+					if (property === 'toString') {
+						return () => '[object Object]';
 					}
 
 					if (property in json) {
@@ -45,5 +45,5 @@ export function create<T extends object>() {
 		};
 	}
 
-	return { methods };
+	return {methods};
 }

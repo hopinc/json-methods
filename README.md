@@ -17,7 +17,7 @@ npm install --save @onehop/json-methods
 For something a little bit more in depth, but still simple, checkout [/examples/basic.ts](/examples/basic.ts)
 
 ```ts
-import { create } from "@onehop/json-methods";
+import {create} from '@onehop/json-methods';
 
 interface User {
 	id: string;
@@ -44,7 +44,7 @@ const user = users.parse(json);
 console.log(user.email);
 
 // And call our methods
-console.log("Can watch the movie?:", user.isAdult());
+console.log('Can watch the movie?:', user.isAdult());
 ```
 
 ## Runtimes
