@@ -2,6 +2,16 @@
 
 A utility for adding methods to any JSON object. For example, deserializing a user object from your API and adding a `.isAdult()`.
 
+## Installation
+
+```bash
+# With yarn
+yarn add @onehop/json-methods
+
+# With npm
+npm install --save @onehop/json-methods
+```
+
 ## Basic Example
 
 ```ts
@@ -25,9 +35,16 @@ const users = create<User>().methods({
 const json = await getUserFromAPI();
 const user = users.from(json);
 
+// Or, if you have a JSON string, we can parse it for you
+const user = users.parse(json);
+
 // Safely access properties:
 console.log(user.email);
 
 // And call our methods
 console.log("Can watch the movie?:", user.isAdult());
 ```
+
+## Runtimes
+
+This library is designed to work in any runtime that supports `Proxy`, so feel free to pop it into Bun, Node, Cloudflare workers or any modern browser.

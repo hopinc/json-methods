@@ -35,6 +35,7 @@ const users = create<User>().methods({
 // and use .from: `const alistair = users.from({ name: 'alistair', age: 17 });`
 const alistair = users.parse(JSON.stringify({ name: "alistair", age: 17 }));
 
+// Accessing property .name from raw object and also our method .getAge() & .isAdult()
 console.log(alistair.name, "is", alistair.getAge(), "is adult?:", alistair.isAdult());
 console.log("Alistair is over 16?:", alistair.isAtLeastAge(16));
 

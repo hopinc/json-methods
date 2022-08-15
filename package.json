@@ -8,10 +8,12 @@
 	"author": "Alistair Smith <hi@alistair.sh>",
 	"license": "MIT",
 	"scripts": {
-		"build": "tsup src/index.ts --format cjs,esm --dts"
+		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"examples-basic": "tsx examples/basic.ts"
 	},
 	"devDependencies": {
 		"tsup": "^6.2.2",
+		"tsx": "^3.8.2",
 		"typescript": "^4.7.4"
 	}
 }
