@@ -25,7 +25,7 @@ interface User {
 	age: number;
 }
 
-const users = create<User>().methods({
+const Users = create<User>().methods({
 	// Methods must be created with method function syntax,
 	// rather than property arrow functions (so that `this` can be bound)
 	isAdult() {
@@ -35,15 +35,37 @@ const users = create<User>().methods({
 
 // json is the JSON object that we want to add methods to
 const json = await getUserFromAPI();
-const user = users.from(json);
+const user = Users.from(json);
 
 // Or, if you have a JSON string, we can parse it for you
-const user = users.parse(json);
+const user = Users.parse(json);
 
 // Safely access properties:
 console.log(user.email);
 
 // And call our methods
+console.log('Can watch the movie?:', user.isAdult());
+```
+
+## Validation
+
+While you can use this library to validate certain fields in an object, `json-methods` will not validate that an object has the correct fields (at runtime we cannot know what fields an object will have, even if you pass a TypeScript generic). For this reason, `json-methods` supports `.from` which will allow you to use something like Zod or Yup.
+
+```ts
+const schema = z.object({
+	age: z.number().min(0),
+});
+
+// Infer type from the schema for single source of truth
+const Users = create<z.infer<typeof schema>>().methods({
+	isAdult() {
+		return this.age >= 18;
+	},
+});
+
+const raw = await getUserFromAPI();
+const user = Users.from(schema.parse(raw));
+
 console.log('Can watch the movie?:', user.isAdult());
 ```
 
