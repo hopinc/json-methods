@@ -69,6 +69,23 @@ const user = Users.from(schema.parse(raw));
 console.log('Can watch the movie?:', user.isAdult());
 ```
 
+## Advanced TypeScript
+
+For more advanced use cases, there's a type exported called `Infer` that will allow you to get the full type of your object with the methods added
+
+```ts
+import {create, Infer} from '@onehop/json-methods';
+
+const Users = create<{age: number}>().methods({
+	isAdult() {
+		return this.age >= 18;
+	},
+});
+
+// UserWithMethods is {age: number} & {isAdult(): boolean}
+type UserWithMethods = Infer<typeof Users>;
+```
+
 ## Runtimes
 
 This library is designed to work in any runtime that supports `Proxy`, so feel free to pop it into Bun, Node, Cloudflare workers or any modern browser.
