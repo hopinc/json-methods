@@ -85,7 +85,3 @@ const Users = create<{age: number}>().methods({
 // UserWithMethods is {age: number} & {isAdult(): boolean}
 type UserWithMethods = Infer<typeof Users>;
 ```
-
-## Runtimes
-
-This library is designed to work in any runtime that supports `Proxy`, so feel free to pop it into Bun, Node, Cloudflare workers or any modern browser.

@@ -43,6 +43,7 @@ console.log(
 	'is adult?:',
 	alistair.isAdult(),
 );
+
 console.log('Alistair is over 16?:', alistair.isAtLeastAge(16));
 
 // Stringifing will result in the original object JSON you parsed in
