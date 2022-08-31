@@ -12,7 +12,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "react",
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitThis": true
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx"]

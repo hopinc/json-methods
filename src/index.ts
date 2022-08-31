@@ -1,6 +1,4 @@
-type Key = string | number | symbol;
-type RecordOf<T> = Record<Key, T>;
-type Method<T> = (this: T, ...args: any[]) => unknown;
+type AnyMethod = (...args: any[]) => any;
 
 function merge<T, M>(json: T, methods: M) {
 	for (const key in methods) {
@@ -14,18 +12,20 @@ function merge<T, M>(json: T, methods: M) {
 	return {
 		...json,
 		...methods,
-	};
+	} as T & M;
 }
 
 export function create<T extends object>() {
-	function methods<M extends RecordOf<Method<T>>>(methods: M) {
+	function methods<M extends object>(
+		methods: M[keyof M] extends AnyMethod ? M & ThisType<T & M> : never,
+	) {
 		return {
 			parse(json: string) {
-				return merge(JSON.parse(json) as T, methods);
+				return merge<T, M>(JSON.parse(json) as T, methods);
 			},
 
 			from(data: T) {
-				return merge(data, methods);
+				return merge<T, M>(data, methods);
 			},
 		};
 	}
