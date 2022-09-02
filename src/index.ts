@@ -15,17 +15,37 @@ function merge<T, M>(json: T, methods: M) {
 	} as T & M;
 }
 
-export function create<T extends object>() {
+/**
+ * SchemaLike is any validation object that has a .parse method
+ */
+export interface SchemaLike<T> {
+	/**
+	 * Parses the input and returns the parsed value. If the input is invalid, it should throw an error.
+	 * and be caught by the caller. json-methods will not handle errors itself.
+	 * @param data The data to parse
+	 */
+	parse(data: unknown): T;
+}
+
+export interface JSONMethodInstance<In, Out> {
+	parse(json: string): Out;
+	from(data: In): Out;
+}
+
+export function create<T extends object>(schema?: SchemaLike<T>) {
 	function methods<M extends object>(
 		methods: M[keyof M] extends AnyMethod ? M & ThisType<T & M> : never,
-	) {
+	): JSONMethodInstance<T, T & M> {
+		const resolve = (data: T) =>
+			merge<T, M>(schema ? schema.parse(data) : data, methods);
+
 		return {
 			parse(json: string) {
-				return merge<T, M>(JSON.parse(json) as T, methods);
+				return resolve(JSON.parse(json));
 			},
 
 			from(data: T) {
-				return merge<T, M>(data, methods);
+				return resolve(data);
 			},
 		};
 	}
@@ -35,4 +55,6 @@ export function create<T extends object>() {
 	};
 }
 
-export type Infer<T> = T extends {parse(json: string): infer R} ? R : never;
+export type Infer<T> = T extends JSONMethodInstance<unknown, infer Out>
+	? Out
+	: never;

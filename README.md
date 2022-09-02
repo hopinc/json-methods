@@ -47,24 +47,31 @@ console.log(user.email);
 console.log('Can watch the movie?:', user.isAdult());
 ```
 
-## Validation
+## Validation / Schemas
 
-While you can use this library to validate certain fields in an object, `json-methods` will not validate that an object has the correct fields (at runtime we cannot know what fields an object will have, even if you pass a TypeScript generic). For this reason, `json-methods` supports `.from` which will allow you to use something like Zod or Yup.
+`json-methods` supports third-party schemas out of the box. You can write your own, or use things like Zod, Yup or Joi. The precondition is that the schema object itself has a method with the signature `parse(data: unknown): T` Here's a basic example using Zod:
 
 ```ts
+import {create} from '@onehop/json-methods';
+import {z} from 'zod';
+
+// This schema has a .parse method internally, so it will work
+// with json-methods without any modification
 const schema = z.object({
 	age: z.number().min(0),
 });
 
-// Infer type from the schema for single source of truth
-const Users = create<z.infer<typeof schema>>().methods({
+const Users = create(schema).methods({
 	isAdult() {
 		return this.age >= 18;
 	},
 });
 
-const raw = await getUserFromAPI();
-const user = Users.from(schema.parse(raw));
+// During this phase, the schema will be used to validate the passed object.
+// If you do not pass a schema, then the raw data will be used, but you
+// could run into runtime errors if you try to access properties that don't exist!
+// For this reason, it's recommended to always pass a schema if you can
+const user = Users.from(await getUserFromAPI());
 
 console.log('Can watch the movie?:', user.isAdult());
 ```
